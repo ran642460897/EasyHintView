@@ -1,4 +1,4 @@
-package com.mxjapp.easyhintview;
+package com.mxjapp.library;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -9,7 +9,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 
 
 /**
