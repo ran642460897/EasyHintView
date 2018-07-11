@@ -34,5 +34,6 @@
         app:textColor="@color/colorAccent"
         app:gravity="end"
         app:leftDrawable="@drawable/ic_email"
+        app:rightDrawable="@drawable/ic_email"
         app:leftDrawablePadding="6dp" />
 </LinearLayout>

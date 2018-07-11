@@ -1,10 +1,11 @@
 package com.mxjapp.library;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.Nullable;
+import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -27,16 +28,17 @@ public class EasyHintView extends LinearLayout {
         this(context, null);
     }
 
-    public EasyHintView(Context context, @Nullable AttributeSet attrs) {
+    public EasyHintView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public EasyHintView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
-        this(context, attrs, defStyleAttr,0);
-    }
-
-    public EasyHintView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public EasyHintView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        initView(attrs);
+    }
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public EasyHintView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        super(context, attrs, defStyleAttr,defStyleRes);
         initView(attrs);
     }
     private void initView(AttributeSet attrs){
@@ -60,7 +62,7 @@ public class EasyHintView extends LinearLayout {
         ColorStateList rightColor=typedArray.getColorStateList(R.styleable.EasyHintView_textColor);
         int rightSize=typedArray.getDimensionPixelSize(R.styleable.EasyHintView_textSize,0);
         int rightGravity=typedArray.getInteger(R.styleable.EasyHintView_gravity,0)==0?Gravity.START:Gravity.END;
-        Drawable rightDrawable=typedArray.getDrawable(R.styleable.EasyHintView_rightDrawable);
+        int rightDrawableId=typedArray.getResourceId(R.styleable.EasyHintView_rightDrawable,0);
         int rightDrawablePadding=typedArray.getDimensionPixelOffset(R.styleable.EasyHintView_rightDrawablePadding,0);
         boolean singleLine=typedArray.getBoolean(R.styleable.EasyHintView_singleLine,false);
         autoHide=typedArray.getBoolean(R.styleable.EasyHintView_autoHide,true);
@@ -80,8 +82,9 @@ public class EasyHintView extends LinearLayout {
 
         if(rightColor!=null) rightTV.setTextColor(rightColor);
         if(rightSize!=0) rightTV.setTextSize(TypedValue.COMPLEX_UNIT_PX,rightSize);
-        if(rightDrawable!=null) {
-            rightDrawable.setBounds(0,0,rightDrawable.getMinimumWidth(),rightDrawable.getMinimumHeight());
+        if(rightDrawableId!=0) {
+            Drawable rightDrawable= ContextCompat.getDrawable(getContext(),rightDrawableId);
+            if(rightDrawable!=null) rightDrawable.setBounds(0,0,rightDrawable.getMinimumWidth(),rightDrawable.getMinimumHeight());
             rightTV.setCompoundDrawables(null,null,rightDrawable,null);
             if(rightDrawablePadding>0) rightTV.setCompoundDrawablePadding(rightDrawablePadding);
         }
