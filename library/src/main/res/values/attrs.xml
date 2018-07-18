@@ -13,8 +13,8 @@
             <enum name="end" value="1" />
         </attr>
         <attr name="orientation">
-            <enum name="horizontal">0</enum>
-            <enum name="vertical">1</enum>
+            <enum name="horizontal" value="0"/>
+            <enum name="vertical" value="1"/>
         </attr>
         <attr name="space" format="dimension"/>
 
