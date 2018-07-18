@@ -12,6 +12,11 @@
             <enum name="start" value="0" />
             <enum name="end" value="1" />
         </attr>
+        <attr name="orientation">
+            <enum name="horizontal">0</enum>
+            <enum name="vertical">1</enum>
+        </attr>
+        <attr name="space" format="dimension"/>
 
         <attr name="leftHint" format="string"/>
         <attr name="leftDrawable" format="reference"/>

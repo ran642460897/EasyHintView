@@ -66,6 +66,10 @@ public class EasyHintView extends LinearLayout {
         int rightDrawablePadding=typedArray.getDimensionPixelOffset(R.styleable.EasyHintView_rightDrawablePadding,0);
         boolean singleLine=typedArray.getBoolean(R.styleable.EasyHintView_singleLine,false);
         autoHide=typedArray.getBoolean(R.styleable.EasyHintView_autoHide,true);
+        //container attr
+        int orientation=typedArray.getInteger(R.styleable.EasyHintView_orientation,HORIZONTAL);
+        int space=typedArray.getDimensionPixelSize(R.styleable.EasyHintView_space,0);
+
         typedArray.recycle();
         //set attr
         if(leftEms!=0) leftTV.setEms(leftEms);
@@ -93,6 +97,11 @@ public class EasyHintView extends LinearLayout {
         rightTV.setText(text);
         rightTV.setSingleLine(singleLine);
         if(autoHide) this.setVisibility(TextUtils.isEmpty(text)?GONE:VISIBLE);
+
+        setOrientation(orientation);
+        if(orientation==HORIZONTAL) rightTV.setPadding(space,0,0,0);
+        else rightTV.setPadding(0,space,0,0);
+
     }
 
     public CharSequence getLeftHint() {
