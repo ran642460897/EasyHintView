@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
@@ -22,7 +23,7 @@ import android.widget.TextView;
  */
 
 public class EasyHintView extends LinearLayout {
-    private TextView leftTV,rightTV;
+    private TextView hintTV,textTV;
     private boolean autoHide;
     public EasyHintView(Context context) {
         this(context, null);
@@ -42,80 +43,81 @@ public class EasyHintView extends LinearLayout {
         initView(attrs);
     }
     private void initView(AttributeSet attrs){
-        final LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(
-                Context.LAYOUT_INFLATER_SERVICE);
-        if(inflater!=null) inflater.inflate(R.layout.easy_hint_view, this, true);
-        leftTV=findViewById(R.id.left);
-        rightTV=findViewById(R.id.right);
-        //left text view attr
+//        if(inflater!=null) inflater.inflate(R.layout.easy_hint_view, this, true);
+        hintTV=new TextView(getContext());
+        textTV=new TextView(getContext());
+        //hint text view attr
         TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.EasyHintView);
-        CharSequence leftHint=typedArray.getString(R.styleable.EasyHintView_leftHint);
-        int leftEms=typedArray.getInteger(R.styleable.EasyHintView_leftEms,0);
-        int leftGravity=typedArray.getInteger(R.styleable.EasyHintView_leftGravity,0)==0?Gravity.START:Gravity.END;
-        int leftSize=typedArray.getDimensionPixelSize(R.styleable.EasyHintView_leftSize,0);
-        int leftDrawableId=typedArray.getResourceId(R.styleable.EasyHintView_leftDrawable,0);
-        int leftDrawablePadding=typedArray.getDimensionPixelOffset(R.styleable.EasyHintView_leftDrawablePadding,0);
-        ColorStateList leftColor=typedArray.getColorStateList(R.styleable.EasyHintView_leftColor);
-        //right text view attr
+        CharSequence hintHint=typedArray.getString(R.styleable.EasyHintView_hint);
+        int hintEms=typedArray.getInteger(R.styleable.EasyHintView_hintEms,0);
+        int hintGravity=typedArray.getInteger(R.styleable.EasyHintView_hintGravity,0)==0?Gravity.START:Gravity.END;
+        int hintSize=typedArray.getDimensionPixelSize(R.styleable.EasyHintView_hintSize,0);
+        int hintDrawableId=typedArray.getResourceId(R.styleable.EasyHintView_hintDrawable,0);
+        int hintDrawablePadding=typedArray.getDimensionPixelOffset(R.styleable.EasyHintView_hintDrawablePadding,0);
+        ColorStateList hintColor=typedArray.getColorStateList(R.styleable.EasyHintView_hintColor);
+        //text text view attr
         CharSequence text=typedArray.getString(R.styleable.EasyHintView_text);
         CharSequence textHint=typedArray.getString(R.styleable.EasyHintView_textHint);
-        ColorStateList rightColor=typedArray.getColorStateList(R.styleable.EasyHintView_textColor);
-        int rightSize=typedArray.getDimensionPixelSize(R.styleable.EasyHintView_textSize,0);
-        int rightGravity=typedArray.getInteger(R.styleable.EasyHintView_gravity,0)==0?Gravity.START:Gravity.END;
-        int rightDrawableId=typedArray.getResourceId(R.styleable.EasyHintView_rightDrawable,0);
-        int rightDrawablePadding=typedArray.getDimensionPixelOffset(R.styleable.EasyHintView_rightDrawablePadding,0);
+        ColorStateList textColor=typedArray.getColorStateList(R.styleable.EasyHintView_textColor);
+        int textSize=typedArray.getDimensionPixelSize(R.styleable.EasyHintView_textSize,0);
+        int textGravity=typedArray.getInteger(R.styleable.EasyHintView_gravity,0)==0?Gravity.START:Gravity.END;
+        int textDrawableId=typedArray.getResourceId(R.styleable.EasyHintView_textDrawable,0);
+        int textDrawablePadding=typedArray.getDimensionPixelOffset(R.styleable.EasyHintView_textDrawablePadding,0);
+        float textLineSpacingExtra=typedArray.getDimension(R.styleable.EasyHintView_textLineSpacingExtra,0);
         boolean singleLine=typedArray.getBoolean(R.styleable.EasyHintView_singleLine,false);
         autoHide=typedArray.getBoolean(R.styleable.EasyHintView_autoHide,true);
         //container attr
-        int orientation=typedArray.getInteger(R.styleable.EasyHintView_orientation,HORIZONTAL);
         int space=typedArray.getDimensionPixelSize(R.styleable.EasyHintView_space,0);
 
         typedArray.recycle();
         //set attr
-        if(leftEms!=0) leftTV.setEms(leftEms);
-        if(leftColor!=null) leftTV.setTextColor(leftColor);
-        if(leftSize!=0) leftTV.setTextSize(TypedValue.COMPLEX_UNIT_PX,leftSize);
-        leftTV.setGravity(leftGravity);
-        if(leftDrawableId!=0) {
-            Drawable leftDrawable= ContextCompat.getDrawable(getContext(),leftDrawableId);
-            if(leftDrawable!=null) leftDrawable.setBounds(0,0,leftDrawable.getMinimumWidth(),leftDrawable.getMinimumHeight());
-            leftTV.setCompoundDrawables(leftDrawable,null,null,null);
-            if(leftDrawablePadding>0) leftTV.setCompoundDrawablePadding(leftDrawablePadding);
+        if(hintEms!=0) hintTV.setEms(hintEms);
+        if(hintColor!=null) hintTV.setTextColor(hintColor);
+        else hintTV.setTextColor(Color.parseColor("#999999"));
+        if(hintSize!=0) hintTV.setTextSize(TypedValue.COMPLEX_UNIT_PX,hintSize);
+        hintTV.setGravity(hintGravity);
+        if(hintDrawableId!=0) {
+            Drawable hintDrawable= ContextCompat.getDrawable(getContext(),hintDrawableId);
+            if(hintDrawable!=null) hintDrawable.setBounds(0,0,hintDrawable.getMinimumWidth(),hintDrawable.getMinimumHeight());
+            hintTV.setCompoundDrawables(hintDrawable,null,null,null);
+            if(hintDrawablePadding>0) hintTV.setCompoundDrawablePadding(hintDrawablePadding);
         }
-        leftTV.setText(leftHint);
+        hintTV.setText(hintHint);
 
-        if(rightColor!=null) rightTV.setTextColor(rightColor);
-        if(rightSize!=0) rightTV.setTextSize(TypedValue.COMPLEX_UNIT_PX,rightSize);
-        if(rightDrawableId!=0) {
-            Drawable rightDrawable= ContextCompat.getDrawable(getContext(),rightDrawableId);
-            if(rightDrawable!=null) rightDrawable.setBounds(0,0,rightDrawable.getMinimumWidth(),rightDrawable.getMinimumHeight());
-            rightTV.setCompoundDrawables(null,null,rightDrawable,null);
-            if(rightDrawablePadding>0) rightTV.setCompoundDrawablePadding(rightDrawablePadding);
+        if(textColor!=null) textTV.setTextColor(textColor);
+        if(textSize!=0) textTV.setTextSize(TypedValue.COMPLEX_UNIT_PX,textSize);
+        if(textLineSpacingExtra>0) textTV.setLineSpacing(textLineSpacingExtra,textTV.getLineSpacingMultiplier());
+        if(textDrawableId!=0) {
+            Drawable textDrawable= ContextCompat.getDrawable(getContext(),textDrawableId);
+            if(textDrawable!=null) textDrawable.setBounds(0,0,textDrawable.getMinimumWidth(),textDrawable.getMinimumHeight());
+            textTV.setCompoundDrawables(null,null,textDrawable,null);
+            if(textDrawablePadding>0) textTV.setCompoundDrawablePadding(textDrawablePadding);
         }
-        rightTV.setGravity(rightGravity);
-        rightTV.setHint(textHint);
-        rightTV.setText(text);
-        rightTV.setSingleLine(singleLine);
+        textTV.setGravity(textGravity);
+        textTV.setHint(textHint);
+        textTV.setText(text);
+        textTV.setSingleLine(singleLine);
         if(autoHide) this.setVisibility(TextUtils.isEmpty(text)?GONE:VISIBLE);
 
-        setOrientation(orientation);
-        if(orientation==HORIZONTAL) rightTV.setPadding(space,0,0,0);
-        else rightTV.setPadding(0,space,0,0);
+        if(getOrientation()==HORIZONTAL) textTV.setPadding(space,0,0,0);
+        else textTV.setPadding(0,space,0,0);
 
+        addView(hintTV);
+        addView(textTV);
     }
 
     public CharSequence getLeftHint() {
-        return leftTV.getText();
+        return hintTV.getText();
     }
 
     public void setLeftHint(CharSequence label) {
-        leftTV.setText(label);
+        hintTV.setText(label);
     }
 
-    public CharSequence getText() {return rightTV.getText();}
+    public CharSequence getText() {return textTV.getText();}
 
     public void setText(CharSequence text) {
-        rightTV.setText(text);
+        textTV.setText(text);
         if(autoHide) this.setVisibility(TextUtils.isEmpty(text)?GONE:VISIBLE);
     }
 }
