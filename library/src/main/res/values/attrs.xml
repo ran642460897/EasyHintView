@@ -8,6 +8,10 @@
         <attr name="textDrawable" format="reference"/>
         <attr name="textDrawablePadding" format="dimension"/>
         <attr name="textLineSpacingExtra" format="dimension"/>
+        <attr name="textViewWidth" format="dimension">
+            <enum name="match_parent" value="-1" />
+            <enum name="wrap_content" value="-2" />
+        </attr>
         <attr name="singleLine" format="boolean"/>
         <attr name="gravity" >
             <enum name="start" value="0" />

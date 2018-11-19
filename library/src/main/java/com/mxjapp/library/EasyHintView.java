@@ -13,6 +13,7 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -63,6 +64,7 @@ public class EasyHintView extends LinearLayout {
         int textGravity=typedArray.getInteger(R.styleable.EasyHintView_gravity,0)==0?Gravity.START:Gravity.END;
         int textDrawableId=typedArray.getResourceId(R.styleable.EasyHintView_textDrawable,0);
         int textDrawablePadding=typedArray.getDimensionPixelOffset(R.styleable.EasyHintView_textDrawablePadding,0);
+        int textViewWidth=typedArray.getLayoutDimension(R.styleable.EasyHintView_textViewWidth,LayoutParams.WRAP_CONTENT);
         float textLineSpacingExtra=typedArray.getDimension(R.styleable.EasyHintView_textLineSpacingExtra,0);
         boolean singleLine=typedArray.getBoolean(R.styleable.EasyHintView_singleLine,false);
         autoHide=typedArray.getBoolean(R.styleable.EasyHintView_autoHide,true);
@@ -97,6 +99,8 @@ public class EasyHintView extends LinearLayout {
         textTV.setHint(textHint);
         textTV.setText(text);
         textTV.setSingleLine(singleLine);
+        ViewGroup.LayoutParams params=new ViewGroup.LayoutParams(textViewWidth, ViewGroup.LayoutParams.WRAP_CONTENT);
+        textTV.setLayoutParams(params);
         if(autoHide) this.setVisibility(TextUtils.isEmpty(text)?GONE:VISIBLE);
 
         if(getOrientation()==HORIZONTAL) textTV.setPadding(space,0,0,0);

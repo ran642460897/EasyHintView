@@ -14,10 +14,20 @@
         app:text="你好slkdfjlajslfjlsjfljaslfjldsjfljasdlfjlasjflsjalfsdjlfjlasjfldsjflajslfjladjklfjaslfjdslajfklaskjlfdjslkfjkslfj"
         app:textLineSpacingExtra="20dp"
         app:space="20dp"/>
-    <TextView
-        android:layout_width="wrap_content"
+    <com.mxjapp.library.EasyHintView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:lineSpacingExtra="20dp"
+        app:text="123"
+        app:hint="你好"
+        app:gravity="end"
+        app:textViewWidth="match_parent"
+        app:hintDrawable="@mipmap/ic_arrow"
+        app:textDrawable="@mipmap/ic_arrow"
+        app:textSize="25sp"
+        app:hintSize="25sp"
+        app:textDrawablePadding="12dp"
+        app:hintDrawablePadding="10dp"
+        android:padding="10dp"
         />
 
 </LinearLayout>
