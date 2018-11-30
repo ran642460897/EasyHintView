@@ -12,7 +12,6 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -60,6 +59,7 @@ public class EasyHintView extends LinearLayout {
         CharSequence text=typedArray.getString(R.styleable.EasyHintView_text);
         CharSequence textHint=typedArray.getString(R.styleable.EasyHintView_textHint);
         ColorStateList textColor=typedArray.getColorStateList(R.styleable.EasyHintView_textColor);
+        ColorStateList textHintColor=typedArray.getColorStateList(R.styleable.EasyHintView_textHintColor);
         int textSize=typedArray.getDimensionPixelSize(R.styleable.EasyHintView_textSize,0);
         int textGravity=typedArray.getInteger(R.styleable.EasyHintView_gravity,0)==0?Gravity.START:Gravity.END;
         int textDrawableId=typedArray.getResourceId(R.styleable.EasyHintView_textDrawable,0);
@@ -87,6 +87,7 @@ public class EasyHintView extends LinearLayout {
         hintTV.setText(hintHint);
 
         if(textColor!=null) textTV.setTextColor(textColor);
+        if(textHintColor!=null) textTV.setHintTextColor(textHintColor);
         if(textSize!=0) textTV.setTextSize(TypedValue.COMPLEX_UNIT_PX,textSize);
         if(textLineSpacingExtra>0) textTV.setLineSpacing(textLineSpacingExtra,textTV.getLineSpacingMultiplier());
         if(textDrawableId!=0) {
@@ -110,11 +111,11 @@ public class EasyHintView extends LinearLayout {
         addView(textTV);
     }
 
-    public CharSequence getLeftHint() {
+    public CharSequence getHint() {
         return hintTV.getText();
     }
 
-    public void setLeftHint(CharSequence label) {
+    public void setHint(CharSequence label) {
         hintTV.setText(label);
     }
 
