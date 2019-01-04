@@ -65,6 +65,7 @@ public class EasyHintView extends LinearLayout {
         int textDrawableId=typedArray.getResourceId(R.styleable.EasyHintView_textDrawable,0);
         int textDrawablePadding=typedArray.getDimensionPixelOffset(R.styleable.EasyHintView_textDrawablePadding,0);
         int textViewWidth=typedArray.getLayoutDimension(R.styleable.EasyHintView_textViewWidth,LayoutParams.WRAP_CONTENT);
+        int textMaxLines=typedArray.getInteger(R.styleable.EasyHintView_textMaxLines,0);
         float textLineSpacingExtra=typedArray.getDimension(R.styleable.EasyHintView_textLineSpacingExtra,0);
         boolean singleLine=typedArray.getBoolean(R.styleable.EasyHintView_singleLine,false);
         autoHide=typedArray.getBoolean(R.styleable.EasyHintView_autoHide,true);
@@ -106,6 +107,11 @@ public class EasyHintView extends LinearLayout {
 
         if(getOrientation()==HORIZONTAL) textTV.setPadding(space,0,0,0);
         else textTV.setPadding(0,space,0,0);
+
+        if(textMaxLines>0) {
+            textTV.setMaxLines(textMaxLines);
+            textTV.setEllipsize(TextUtils.TruncateAt.END);
+        }
 
         addView(hintTV);
         addView(textTV);

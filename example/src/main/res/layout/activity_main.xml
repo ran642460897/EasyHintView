@@ -11,10 +11,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:hint="测试"
-        app:text=""
+        app:text="5555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555"
         app:textHintColor="@color/colorPrimary"
         app:textHint="123"
-        app:textLineSpacingExtra="20dp"
-        app:space="20dp"
-        app:autoHide="false"/>
+        app:autoHide="false"
+        app:textMaxLines="2"
+        app:space="10dp"/>
 </LinearLayout>
