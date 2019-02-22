@@ -3,7 +3,7 @@
 # Download
 #### implementation 'com.github.ran642460897:EasyHintView:1.2.6'
 # Usage
-><com.mxjapp.library.EasyHintView  
+><com.mxjapp.library.EasyHintView
 >>	android:layout_width="match_parent"  
 >>	android:layout_height="wrap_content"  
 >>	app:hint="item4:"  
