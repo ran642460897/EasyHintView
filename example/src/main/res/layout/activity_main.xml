@@ -5,16 +5,55 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:showDividers="middle|end"
+    android:divider="@drawable/divider_line">
 
     <com.mxjapp.library.EasyHintView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:hint="测试"
-        app:text="5555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555"
-        app:textHintColor="@color/colorPrimary"
-        app:textHint="123"
+        android:padding="10dp"
+        app:hint="item1"
         app:autoHide="false"
+        app:textDrawable="@drawable/ic_arrow_right_s"
+        app:hintDrawable="@drawable/ic_main_setting_s"
+        app:hintDrawablePadding="4dp"
+        app:textViewWidth="match_parent" />
+    <com.mxjapp.library.EasyHintView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        app:hint="item2"
+        app:hintColor="#333333"
+        app:text="text"
+        app:textColor="#999999"
+        app:textDrawable="@drawable/ic_arrow_right_s"
+        app:gravity="end"
+        app:textViewWidth="match_parent" />
+    <com.mxjapp.library.EasyHintView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        app:hint="item3:"
+        app:text="text" />
+    <com.mxjapp.library.EasyHintView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        app:hint="item4:"
+        app:text="text" />
+    <com.mxjapp.library.EasyHintView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        app:hint="item5"
+        app:hintColor="#333333"
+        app:text="1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+        app:textColor="#999999"
+        app:textDrawable="@drawable/ic_arrow_right_s"
+        app:gravity="end"
+        app:textViewWidth="match_parent"
         app:textMaxLines="2"
-        app:space="10dp"/>
+        app:space="20dp"/>
 </LinearLayout>
